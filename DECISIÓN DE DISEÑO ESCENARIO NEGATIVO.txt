@@ -1,0 +1,16 @@
+DECISIÓN DE DISEÑO: ESCENARIO NEGATIVO EN CARRITOS (EmptyCartResponse)
+
+En las pruebas de los Carts sobre FakeStoreAPI, se probó consultar un 
+ID que no existe, como el 999999. Lo que se esperaría, es que el 
+servicio responda con un 404 (no encontrado), pero al probarlo realmente
+se vio que FakeStoreAPI devuelve un código 200 con el cuerpo vacío o null,
+sin ningún Cart.
+Para mantener el orden del patrón Screenplay, se creó la Question 
+"EmptyCartResponse" con el fin de comprobar que la respuesta venga 
+vacía o nula y no devuelva un carrito valido.
+
+De esta forma, evitamos falsos fallos al validar como realmente responde
+el servicio bajo prueba en este momento, se mantiene limpia la separación
+dentro de Screenplay, dejando la verificación en una Question en vez de 
+meter lógica suelta en los steps de Cucumber. Además, facilita revisar o 
+ajustar la validación si mas adelante cambia la forma en que responde la API.
